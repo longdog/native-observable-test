@@ -1,0 +1,24 @@
+import './style.css'
+
+
+function setupCounter(element) {
+  let counter = 0
+  const setCounter = (count) => {
+    counter = count
+    element.innerHTML = `count is ${counter}`
+  }
+  element.when('click').subscribe(() => setCounter(counter + 1))
+  setCounter(0)
+}
+
+
+document.querySelector('#app').innerHTML = `
+  <div>
+    <div class="card">
+      <button id="counter" type="button"></button>
+    </div>
+  </div>
+`
+
+
+setupCounter(document.querySelector('#counter'))
