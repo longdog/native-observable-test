@@ -13,10 +13,17 @@ function setupCounter(element) {
 function subsr() {
   const nums = new Observable((subscriber) => {
     subscriber.next(1);
-    setTimeout(() => subscriber.next(2));
+    subscriber.next(3);
+    subscriber.next(5);
+    subscriber.next(7);
+    subscriber.next(9);
   });
 
-  nums.subscribe((n) => console.log("new data for subscriber 1:", n));
+  nums
+    .map((n) => n + 1)
+    .inspect((n) => console.log(`tap: ${n}`))
+    .filter((n) => n < 10)
+    .subscribe((n) => console.log("new data for subscriber 1:", n));
 
   nums.subscribe((n) => console.log("new data for subscriber 2:", n));
 }
